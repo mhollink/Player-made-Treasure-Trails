@@ -14,7 +14,7 @@ repositories {
 }
 
 def runeLiteVersion = 'latest.release'
-def pluginMainClass = 'dev.hollink.partytrails.TreasureTrailPlugin'
+def pluginMainClass = 'dev.hollink.partytrails.PartyTrailsPlugin'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
@@ -41,6 +41,14 @@ tasks.register('run', JavaExec) {
 
 	jvmArgs "-ea"
 	args "--developer-mode", "--debug"
+}
+
+tasks.register('runTest', JavaExec) {
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = pluginMainClass + "Test"
+
+    jvmArgs "-ea"
+    args "--developer-mode", "--debug"
 }
 
 tasks.register('shadowJar', Jar) {
