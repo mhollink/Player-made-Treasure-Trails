@@ -90,11 +90,10 @@ public final class EmoteStepEditor extends StepEditor implements FormHelper
 			hintArea.setText(emoteStep.getHint());
 			locationSelector.setLocation(emoteStep.getTargetLocation());
 			log.debug("reloaded emote step {}", stepNumber);
-			log.debug(emoteStep.toString());
 		}
 		else
 		{
-			log.warn("Unable to set emote step values, given step was of type {}", trailStep.type());
+			log.debug("Unable to set emote step values, given step was of type {}", trailStep.type());
 		}
 	}
 }

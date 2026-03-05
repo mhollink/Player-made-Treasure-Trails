@@ -121,9 +121,8 @@ public final class InteractionStepEditor extends StepEditor implements FormHelpe
 			action.setText(String.valueOf(target.getInteractionType()));
 			locationSelector.setLocation(target.getLocation());
 			log.debug("reloaded interaction step {}", stepNumber);
-			log.debug(interactionStep.toString());
 		} else {
-			log.warn("Unable to set interaction step values, given step was of type {}", trailStep.type());
+			log.debug("Unable to set interaction step values, given step was of type {}", trailStep.type());
 		}
 	}
 }

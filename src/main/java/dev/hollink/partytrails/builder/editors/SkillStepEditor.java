@@ -144,11 +144,10 @@ public final class SkillStepEditor extends StepEditor implements FormHelper
 			expField.setText(String.valueOf(skillStep.getExpRequired()));
 			regionSelector.setWorldArea(skillStep.getArea());
 			log.debug("reloaded skill step {}", stepNumber);
-			log.debug(skillStep.toString());
 		}
 		else
 		{
-			log.warn("Unable to set skill step values, given step was of type {}", trailStep.type());
+			log.debug("Unable to set skill step values, given step was of type {}", trailStep.type());
 		}
 	}
 }

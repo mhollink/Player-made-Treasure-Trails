@@ -84,9 +84,8 @@ public final class CoordinateStepEditor extends StepEditor implements FormHelper
 			CoordsStep coordsStep = (CoordsStep) trailStep;
 			locationSelector.setLocation(coordsStep.getTargetLocation());
 			log.debug("reloaded coordinate step {}", stepNumber);
-			log.debug(coordsStep.toString());
 		}else {
-			log.warn("Unable to set coordinate step values, given step was of type {}", trailStep.type());
+			log.debug("Unable to set coordinate step values, given step was of type {}", trailStep.type());
 		}
 	}
 }

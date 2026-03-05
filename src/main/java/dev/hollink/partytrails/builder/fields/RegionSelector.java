@@ -5,14 +5,12 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 
-public final class RegionSelector extends JPanel
+public final class RegionSelector extends LocationSelector
 {
 	private final JTextField xField = new JTextField();
 	private final JTextField yField = new JTextField();
@@ -56,39 +54,6 @@ public final class RegionSelector extends JPanel
 		planeField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
 	}
 
-	private JPanel createRow(String labelText, JComponent field)
-	{
-		JPanel row = new JPanel();
-		row.setLayout(new BoxLayout(row, BoxLayout.Y_AXIS));
-		row.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-		JLabel label = new JLabel(labelText);
-		label.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-		field.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-		row.add(label);
-		row.add(field);
-
-		return row;
-	}
-
-	private WorldPoint getWorldLocation()
-	{
-		try
-		{
-			int x = Integer.parseInt(xField.getText());
-			int y = Integer.parseInt(yField.getText());
-			int plane = Integer.parseInt(planeField.getText());
-
-			return new WorldPoint(x, y, plane);
-		}
-		catch (Exception e)
-		{
-			return null;
-		}
-	}
-
 	public WorldArea getWorldArea()
 	{
 		try
@@ -105,18 +70,6 @@ public final class RegionSelector extends JPanel
 		{
 			return null;
 		}
-	}
-
-	public void setLocation(WorldPoint point)
-	{
-		if (point == null)
-		{
-			return;
-		}
-
-		xField.setText(String.valueOf(point.getX()));
-		yField.setText(String.valueOf(point.getY()));
-		planeField.setText(String.valueOf(point.getPlane()));
 	}
 
 	public boolean setSize(WorldPoint point)

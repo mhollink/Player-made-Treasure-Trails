@@ -11,11 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import net.runelite.api.coords.WorldPoint;
 
-public final class LocationSelector extends JPanel
+public class LocationSelector extends JPanel
 {
-	private final JTextField xField = new JTextField();
-	private final JTextField yField = new JTextField();
-	private final JTextField planeField = new JTextField("0");
+	protected final JTextField xField = new JTextField();
+	protected final JTextField yField = new JTextField();
+	protected final JTextField planeField = new JTextField("0");
 
 	public LocationSelector()
 	{
@@ -43,7 +43,7 @@ public final class LocationSelector extends JPanel
 		planeField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
 	}
 
-	private JPanel createRow(String labelText, JComponent field)
+	protected JPanel createRow(String labelText, JComponent field)
 	{
 		JPanel row = new JPanel();
 		row.setLayout(new BoxLayout(row, BoxLayout.Y_AXIS));
