@@ -73,23 +73,16 @@ public final class RegionSelector extends LocationSelector
 			return false;
 		}
 
-		if (xDiff < 0)
+		widthField.setText(String.valueOf(Math.abs(xDiff)));
+		heightField.setText(String.valueOf(Math.abs(yDiff)));
+
+		if (xDiff > 0)
 		{
 			xField.setText(String.valueOf(point.getX()));
-			widthField.setText(String.valueOf(Math.abs(xDiff)));
 		}
-		else
+		if (yDiff > 0)
 		{
-			widthField.setText(String.valueOf(xDiff));
-		}
-		if (yDiff < 0)
-		{
-			xField.setText(String.valueOf(point.getY()));
-			heightField.setText(String.valueOf(Math.abs(yDiff)));
-		}
-		else
-		{
-			heightField.setText(String.valueOf(yDiff));
+			yField.setText(String.valueOf(point.getY()));
 		}
 
 		return true;
