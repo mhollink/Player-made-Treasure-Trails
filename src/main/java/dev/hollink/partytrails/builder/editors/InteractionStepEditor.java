@@ -4,8 +4,8 @@ import dev.hollink.partytrails.builder.FormHelper;
 import dev.hollink.partytrails.builder.fields.LocationSelector;
 import dev.hollink.partytrails.data.InteractionTarget;
 import dev.hollink.partytrails.data.StepType;
-import dev.hollink.partytrails.data.events.TrailEvent;
 import dev.hollink.partytrails.data.events.InteractionEvent;
+import dev.hollink.partytrails.data.events.TrailEvent;
 import dev.hollink.partytrails.data.steps.InteractionStep;
 import dev.hollink.partytrails.data.steps.TrailStep;
 import java.util.ArrayList;
@@ -107,14 +107,15 @@ public final class InteractionStepEditor extends StepEditor implements FormHelpe
 	@Override
 	public TrailStep toTrailStep()
 	{
-		InteractionTarget target = new InteractionTarget(Integer.parseInt(objectId.getText()), objectName.getText(), action.getText(), locationSelector.getWorldLocation());
+		InteractionTarget target = new InteractionTarget(objectId.getText().isBlank() ? -1 : Integer.parseInt(objectId.getText()), objectName.getText(), action.getText(), locationSelector.getWorldLocation());
 		return new InteractionStep(stepType, hintArea.getText(), target);
 	}
 
 	@Override
 	public void setTrailStep(TrailStep trailStep)
 	{
-		if(trailStep instanceof InteractionStep) {
+		if (trailStep instanceof InteractionStep)
+		{
 			InteractionStep interactionStep = (InteractionStep) trailStep;
 			InteractionTarget target = interactionStep.getTarget();
 			hintArea.setText(interactionStep.getHint());
@@ -123,7 +124,9 @@ public final class InteractionStepEditor extends StepEditor implements FormHelpe
 			action.setText(String.valueOf(target.getInteractionType()));
 			locationSelector.setLocation(target.getLocation());
 			log.debug("reloaded interaction step {}", stepNumber);
-		} else {
+		}
+		else
+		{
 			log.debug("Unable to set interaction step values, given step was of type {}", trailStep.type());
 		}
 	}
