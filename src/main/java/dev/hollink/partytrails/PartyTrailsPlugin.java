@@ -1,17 +1,17 @@
 package dev.hollink.partytrails;
 
 import com.google.inject.Provides;
-import dev.hollink.partytrails.builder.TrailBuilderOverlay;
-import dev.hollink.partytrails.builder.TrailBuilderPanel;
+import dev.hollink.partytrails.trial.builder.TrailBuilderOverlay;
+import dev.hollink.partytrails.trial.builder.TrailBuilderPanel;
 import dev.hollink.partytrails.codec.TrailCodec;
-import dev.hollink.partytrails.data.events.ClueEventFactory;
-import dev.hollink.partytrails.data.events.TrailEvent;
+import dev.hollink.partytrails.events.events.ClueEventFactory;
+import dev.hollink.partytrails.events.events.TrailEvent;
 import dev.hollink.partytrails.data.steps.TrailStep;
 import dev.hollink.partytrails.data.trail.TrailContext;
-import dev.hollink.partytrails.runetime.TrailEventBus;
-import dev.hollink.partytrails.runetime.TrailManager;
-import dev.hollink.partytrails.runetime.TrailOverlay;
-import dev.hollink.partytrails.runetime.TrailRuntime;
+import dev.hollink.partytrails.events.TrailEventBus;
+import dev.hollink.partytrails.trial.hunter.TrailManager;
+import dev.hollink.partytrails.trial.hunter.TrailOverlay;
+import dev.hollink.partytrails.trial.hunter.TrailRuntime;
 import java.awt.image.BufferedImage;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
@@ -91,8 +91,7 @@ public class PartyTrailsPlugin extends Plugin
 
 	@Inject
 	private TrailCodec trailCodec;
-
-
+	
 	private NavigationButton navButton;
 	private TrailBuilderPanel builderPanel;
 	private TrailBuilderOverlay builderOverlay;
@@ -216,7 +215,6 @@ public class PartyTrailsPlugin extends Plugin
 			.priority(5)
 			.panel(this.builderPanel)
 			.build();
-
 	}
 
 }

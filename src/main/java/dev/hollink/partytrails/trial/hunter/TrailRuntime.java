@@ -1,12 +1,14 @@
-package dev.hollink.partytrails.runetime;
+package dev.hollink.partytrails.trial.hunter;
 
 import dev.hollink.partytrails.PartyTrailsConfig;
 import dev.hollink.partytrails.codec.TrailProgressCodec;
 import dev.hollink.partytrails.data.TreasureTrail;
-import dev.hollink.partytrails.data.events.TrailEvent;
+import dev.hollink.partytrails.events.Subscription;
+import dev.hollink.partytrails.events.events.TrailEvent;
 import dev.hollink.partytrails.data.steps.TrailStep;
 import dev.hollink.partytrails.data.trail.TrailContext;
 import dev.hollink.partytrails.data.trail.TrailProgress;
+import dev.hollink.partytrails.events.TrailEventBus;
 import java.awt.Graphics2D;
 import java.io.IOException;
 import javax.inject.Inject;
@@ -35,6 +37,8 @@ public class TrailRuntime
 	private TreasureTrail trail;
 	private TrailStep currentStep;
 
+	private Subscription eventSubscription;
+
 	public void renderCurrentStep(Graphics2D graphics, PanelComponent panel)
 	{
 		if (currentStep == null)
@@ -52,7 +56,7 @@ public class TrailRuntime
 	public void startTrail(TreasureTrail trail)
 	{
 		log.debug("Starting new trail (length={})", trail.getMetadata().getStepCount());
-		bus.register(this::onEvent);
+		this.eventSubscription = bus.register(TrailEvent.class, this::onEvent);
 		this.trail = trail;
 		this.context.getProgress().start(trail.getMetadata().getTrailId());
 		trail.getStep(this.context.getProgress().getCurrentStepIndex())
@@ -71,7 +75,7 @@ public class TrailRuntime
 	public void resumeTrail(TreasureTrail trail, TrailProgress progress)
 	{
 		log.debug("Resuming trail (length={}, currentStep={})", trail.getMetadata().getStepCount(), progress.getCurrentStepIndex());
-		bus.register(this::onEvent);
+		this.eventSubscription = bus.register(TrailEvent.class, this::onEvent);
 		this.trail = trail;
 		trail.getStep(this.context.getProgress().getCurrentStepIndex())
 			.ifPresentOrElse(this::resumeStep, this::resetOnStepNotFound);
@@ -96,7 +100,7 @@ public class TrailRuntime
 		this.trail = null;
 		this.currentStep = null;
 		this.context.getProgress().reset();
-		this.bus.unregister(this::onEvent);
+		this.eventSubscription.unsubscribe();
 	}
 
 	private void onEvent(TrailEvent event)
@@ -132,7 +136,7 @@ public class TrailRuntime
 		log.debug("Completing trail...");
 		this.currentStep = null;
 		this.context.getProgress().setCompleted(true);
-		this.bus.unregister(this::onEvent);
+		this.eventSubscription.unsubscribe();
 	}
 
 	private void saveProgress()

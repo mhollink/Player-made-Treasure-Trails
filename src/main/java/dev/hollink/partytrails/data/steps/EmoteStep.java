@@ -2,8 +2,8 @@ package dev.hollink.partytrails.data.steps;
 
 import dev.hollink.partytrails.data.Emote;
 import dev.hollink.partytrails.data.StepType;
-import dev.hollink.partytrails.data.events.AnimationEvent;
-import dev.hollink.partytrails.data.events.TrailEvent;
+import dev.hollink.partytrails.events.events.AnimationEvent;
+import dev.hollink.partytrails.events.events.TrailEvent;
 import dev.hollink.partytrails.data.trail.TrailContext;
 import java.awt.Color;
 import java.awt.Graphics2D;

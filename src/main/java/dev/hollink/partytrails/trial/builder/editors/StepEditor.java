@@ -1,6 +1,6 @@
-package dev.hollink.partytrails.builder.editors;
+package dev.hollink.partytrails.trial.builder.editors;
 
-import dev.hollink.partytrails.data.events.TrailEvent;
+import dev.hollink.partytrails.events.events.TrailEvent;
 import dev.hollink.partytrails.data.steps.TrailStep;
 import java.awt.Component;
 import java.awt.Dimension;

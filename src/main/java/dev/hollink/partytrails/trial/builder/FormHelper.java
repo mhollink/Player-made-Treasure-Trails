@@ -1,4 +1,4 @@
-package dev.hollink.partytrails.builder;
+package dev.hollink.partytrails.trial.builder;
 
 import java.awt.Component;
 import java.awt.Dimension;

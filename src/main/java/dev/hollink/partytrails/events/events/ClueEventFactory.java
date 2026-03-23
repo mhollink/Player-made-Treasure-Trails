@@ -1,4 +1,4 @@
-package dev.hollink.partytrails.data.events;
+package dev.hollink.partytrails.events.events;
 
 import java.util.Optional;
 import lombok.experimental.UtilityClass;

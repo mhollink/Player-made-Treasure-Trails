@@ -1,4 +1,4 @@
-package dev.hollink.partytrails.runetime;
+package dev.hollink.partytrails.trial.hunter;
 
 import dev.hollink.partytrails.codec.TrailCodec;
 import dev.hollink.partytrails.codec.TrailProgressCodec;

@@ -1,4 +1,4 @@
-package dev.hollink.partytrails.builder.editors;
+package dev.hollink.partytrails.trial.builder.editors;
 
 import lombok.Value;
 
