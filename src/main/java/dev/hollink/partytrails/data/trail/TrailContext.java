@@ -1,6 +1,6 @@
 package dev.hollink.partytrails.data.trail;
 
-import dev.hollink.partytrails.data.events.TrailEvent;
+import dev.hollink.partytrails.events.events.TrailEvent;
 import javax.inject.Inject;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

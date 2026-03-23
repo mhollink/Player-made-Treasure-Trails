@@ -1,8 +1,8 @@
 package dev.hollink.partytrails.data.steps;
 
 import dev.hollink.partytrails.data.StepType;
-import dev.hollink.partytrails.data.events.SkillEvent;
-import dev.hollink.partytrails.data.events.TrailEvent;
+import dev.hollink.partytrails.events.events.SkillEvent;
+import dev.hollink.partytrails.events.events.TrailEvent;
 import dev.hollink.partytrails.data.trail.TrailContext;
 import java.awt.Graphics2D;
 import java.util.Objects;

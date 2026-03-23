@@ -1,6 +1,6 @@
 package dev.hollink.partytrails.data;
 
-import dev.hollink.partytrails.data.events.InteractionEvent;
+import dev.hollink.partytrails.events.events.InteractionEvent;
 import static dev.hollink.partytrails.data.steps.TrailStep.DEFAULT_LOCATION_DISTANCE;
 import lombok.Value;
 import net.runelite.api.coords.WorldPoint;

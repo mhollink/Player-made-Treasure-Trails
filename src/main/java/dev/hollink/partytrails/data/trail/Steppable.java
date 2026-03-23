@@ -1,6 +1,6 @@
 package dev.hollink.partytrails.data.trail;
 
-import dev.hollink.partytrails.data.events.TrailEvent;
+import dev.hollink.partytrails.events.events.TrailEvent;
 
 public interface Steppable
 {

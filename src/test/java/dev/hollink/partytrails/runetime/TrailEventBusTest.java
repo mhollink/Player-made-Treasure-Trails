@@ -1,7 +1,10 @@
 package dev.hollink.partytrails.runetime;
 
-import dev.hollink.partytrails.data.events.AnimationEvent;
-import dev.hollink.partytrails.data.events.TrailEvent;
+import dev.hollink.partytrails.events.EventListener;
+import dev.hollink.partytrails.events.Subscription;
+import dev.hollink.partytrails.events.events.AnimationEvent;
+import dev.hollink.partytrails.events.events.TrailEvent;
+import dev.hollink.partytrails.events.TrailEventBus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -28,8 +31,8 @@ public class TrailEventBusTest
 	{
 		List<TrailEvent> received = new ArrayList<>();
 
-		Consumer<TrailEvent> listener = received::add;
-		eventBus.register(listener);
+		EventListener<TrailEvent> listener = received::add;
+		eventBus.register(TrailEvent.class, listener);
 
 		TrailEvent event = new AnimationEvent(1, new WorldPoint(10, 10, 0));
 		eventBus.publish(event);
@@ -42,9 +45,9 @@ public class TrailEventBusTest
 	{
 		List<TrailEvent> received = new ArrayList<>();
 
-		Consumer<TrailEvent> listener = received::add;
-		eventBus.register(listener);
-		eventBus.unregister(listener);
+		EventListener<TrailEvent> listener = received::add;
+		Subscription subscription = eventBus.register(TrailEvent.class, listener);
+		subscription.unsubscribe();
 
 		TrailEvent event = new AnimationEvent(1, new WorldPoint(10, 10, 0));
 		eventBus.publish(event);
@@ -58,8 +61,8 @@ public class TrailEventBusTest
 		List<TrailEvent> received1 = new ArrayList<>();
 		List<TrailEvent> received2 = new ArrayList<>();
 
-		eventBus.register(received1::add);
-		eventBus.register(received2::add);
+		eventBus.register(TrailEvent.class, received1::add);
+		eventBus.register(TrailEvent.class, received2::add);
 
 		TrailEvent event = new AnimationEvent(1, new WorldPoint(10, 10, 0));
 		eventBus.publish(event);

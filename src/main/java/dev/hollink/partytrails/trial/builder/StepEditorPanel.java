@@ -1,11 +1,13 @@
-package dev.hollink.partytrails.builder;
+package dev.hollink.partytrails.trial.builder;
 
-import dev.hollink.partytrails.builder.editors.StepEditor;
-import dev.hollink.partytrails.builder.editors.StepEditorFactory;
-import dev.hollink.partytrails.builder.editors.StepEditorValidationError;
+import dev.hollink.partytrails.events.Subscription;
+import dev.hollink.partytrails.events.events.TrailEvent;
+import dev.hollink.partytrails.trial.builder.editors.StepEditor;
+import dev.hollink.partytrails.trial.builder.editors.StepEditorFactory;
+import dev.hollink.partytrails.trial.builder.editors.StepEditorValidationError;
 import dev.hollink.partytrails.data.StepType;
 import dev.hollink.partytrails.data.steps.TrailStep;
-import dev.hollink.partytrails.runetime.TrailEventBus;
+import dev.hollink.partytrails.events.TrailEventBus;
 import java.awt.Color;
 import java.util.List;
 import java.util.function.Consumer;
@@ -26,6 +28,7 @@ public final class StepEditorPanel extends JPanel implements FormHelper
 	private final JComboBox<StepType> typeSelect = new JComboBox<>(StepType.values());
 	private StepEditor currentStepEditor;
 	private int stepNumber = 1;
+	private Subscription subscription;
 
 	public StepEditorPanel(TrailEventBus clueEventBus, Consumer<StepEditorPanel> deleteCallback, Runnable updateCallback)
 	{
@@ -55,7 +58,7 @@ public final class StepEditorPanel extends JPanel implements FormHelper
 		currentStepEditor.setStepNumber(stepNumber);
 		currentStepEditor.initForm();
 
-		clueEventBus.register(currentStepEditor::onEvent);
+		subscription = clueEventBus.register(TrailEvent.class, currentStepEditor::onEvent);
 
 		add(currentStepEditor);
 		add(Box.createVerticalStrut(8));
@@ -69,9 +72,9 @@ public final class StepEditorPanel extends JPanel implements FormHelper
 
 	private void rebuildEditor()
 	{
-		if (currentStepEditor != null)
+		if (subscription != null)
 		{
-			clueEventBus.unregister(currentStepEditor::onEvent);
+			subscription.unsubscribe();
 		}
 		removeAll();
 		buildEditor();
